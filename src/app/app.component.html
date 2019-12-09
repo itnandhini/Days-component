@@ -1,0 +1,30 @@
+<form [formGroup]="ScheduleForm">
+  <ng-container *ngFor="let ScheduleFormGroup of ScheduleForm.controls.days.controls; let i = index" >
+    <div [formGroup]="ScheduleFormGroup" style="border:1px solid red;">
+      <input type="radio" formControlName="id" class="custom-control-input" value="All" (click)="clickMe('All')">
+      <label class="custom-control-label">All days</label>
+      <input type="radio" formControlName="id" class="custom-control-input" value="Five" (click)="clickMe('Five')">
+      <label class="custom-control-label">Week days</label>
+      <input type="radio" formControlName="id" class="custom-control-input" value="Two" (click)="clickMe('Two')">
+      <label class="custom-control-label">Week Ends</label>
+      <input type="radio" formControlName="id" class="custom-control-input" value="Any" (click)="clickMe('Any')">
+      <label class="custom-control-label">Custom</label>
+      <table>
+      <tr>
+          <td  *ngFor="let user of users; let inx=index">
+            <button [disabled]="stopEvent" [ngClass]="{'btn btn-danger':!user.active, 'btn btn-success':user.active}"  (click)="click(user,i)"> {{user.active ? user.name:user.name}}
+            </button>
+
+          </td>
+          <td> <label>
+              <button (click)="removeFormControl(i)">remove formGroup</button>
+            </label></td>
+        </tr>
+      </table>
+     
+    </div>
+  </ng-container>
+</form>
+<button (click)="addFormControl()">add new user formGroup</button>
+
+<pre>{{ScheduleForm.value|json}}</pre>
